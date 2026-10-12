@@ -119,7 +119,7 @@ const BlockPageContent = () => {
     config.features.beaconChain.isEnabled && Boolean(blockQuery.data?.withdrawals_count) ?
       {
         id: 'withdrawals',
-        title: 'Withdrawals',
+        title: 'Fruits',
         component: (
           <>
             { blockWithdrawalsQuery.isDegradedData && <ServiceDegradationWarning isLoading={ blockWithdrawalsQuery.isPlaceholderData } mb={ 6 }/> }

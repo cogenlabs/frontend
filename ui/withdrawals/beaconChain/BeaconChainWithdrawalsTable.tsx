@@ -39,7 +39,9 @@ const BeaconChainWithdrawalsTable = ({ items, isLoading, top, view }: Props) => 
       <TableHeaderSticky top={ top }>
         <TableRow>
           <TableColumnHeader>Index</TableColumnHeader>
-          <TableColumnHeader>Validator index</TableColumnHeader>
+          <TableColumnHeader title="Reward code: 0 = block, 1 = winning ticket fruit, 2+ = included fruits; not a permanent miner ID">
+            Miner index
+          </TableColumnHeader>
           { view !== 'block' && <TableColumnHeader>Block</TableColumnHeader> }
           { view !== 'address' && <TableColumnHeader>To</TableColumnHeader> }
           { view !== 'block' && <TableColumnHeader>Timestamp<TimeFormatToggle/></TableColumnHeader> }

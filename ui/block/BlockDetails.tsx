@@ -41,6 +41,7 @@ import ZkSyncL2TxnBatchHashesInfo from 'ui/txnBatches/zkSyncL2/ZkSyncL2TxnBatchH
 
 import BlockDetailsBaseFeeCelo from './details/BlockDetailsBaseFeeCelo';
 import BlockDetailsBlobInfo from './details/BlockDetailsBlobInfo';
+import BlockDetailsCogen from './details/BlockDetailsCogen';
 import BlockDetailsZilliqaQuorumCertificate from './details/BlockDetailsZilliqaQuorumCertificate';
 import type { BlockQuery } from './useBlockQuery';
 
@@ -259,18 +260,20 @@ const BlockDetails = ({ query }: Props) => {
         </Skeleton>
       </DetailedInfo.ItemValue>
 
+      <BlockDetailsCogen height={ data.height } hash={ data.hash } isLoading={ isPlaceholderData }/>
+
       { config.features.beaconChain.isEnabled && Boolean(data.withdrawals_count) && (
         <>
           <DetailedInfo.ItemLabel
-            hint="The number of beacon withdrawals in the block"
+            hint="Reward payouts: the block reward, the winning ticket fruit reward, and rewards for included fruits"
             isLoading={ isPlaceholderData }
           >
-            Withdrawals
+            Fruits
           </DetailedInfo.ItemLabel>
           <DetailedInfo.ItemValue>
             <Skeleton loading={ isPlaceholderData }>
               <Link href={ route({ pathname: '/block/[height_or_hash]', query: { height_or_hash: heightOrHash, tab: 'withdrawals' } }, multichainContext) }>
-                { data.withdrawals_count } withdrawal{ data.withdrawals_count === 1 ? '' : 's' }
+                { data.withdrawals_count } reward payout{ data.withdrawals_count === 1 ? '' : 's' }
               </Link>
             </Skeleton>
           </DetailedInfo.ItemValue>
@@ -620,35 +623,6 @@ const BlockDetails = ({ query }: Props) => {
                 <HashStringShortenDynamic hash={ data.hash_for_merged_mining }/>
               </Box>
               <CopyToClipboard text={ data.hash_for_merged_mining }/>
-            </DetailedInfo.ItemValue>
-          </>
-        ) }
-
-        { data.difficulty && (
-          <>
-            <DetailedInfo.ItemLabel
-              hint={ `Block difficulty for ${ validatorTitle }, used to calibrate block generation time` }
-            >
-              Difficulty
-            </DetailedInfo.ItemLabel>
-            <DetailedInfo.ItemValue>
-              <Box overflow="hidden">
-                <HashStringShortenDynamic hash={ BigNumber(data.difficulty).toFormat() }/>
-              </Box>
-            </DetailedInfo.ItemValue>
-          </>
-        ) }
-        { data.total_difficulty && (
-          <>
-            <DetailedInfo.ItemLabel
-              hint="Total difficulty of the chain until this block"
-            >
-              Total difficulty
-            </DetailedInfo.ItemLabel>
-            <DetailedInfo.ItemValue>
-              <Box overflow="hidden">
-                <HashStringShortenDynamic hash={ BigNumber(data.total_difficulty).toFormat() }/>
-              </Box>
             </DetailedInfo.ItemValue>
           </>
         ) }

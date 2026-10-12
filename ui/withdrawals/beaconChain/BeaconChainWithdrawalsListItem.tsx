@@ -39,7 +39,7 @@ const BeaconChainWithdrawalsListItem = ({ item, isLoading, view }: Props) => {
         <Skeleton loading={ isLoading } display="inline-block">{ item.index }</Skeleton>
       </ListItemMobileGrid.Value>
 
-      <ListItemMobileGrid.Label isLoading={ isLoading }>Validator index</ListItemMobileGrid.Label>
+      <ListItemMobileGrid.Label isLoading={ isLoading }>Miner index</ListItemMobileGrid.Label>
       <ListItemMobileGrid.Value>
         <Skeleton loading={ isLoading } display="inline-block">{ item.validator_index }</Skeleton>
       </ListItemMobileGrid.Value>
@@ -80,13 +80,13 @@ const BeaconChainWithdrawalsListItem = ({ item, isLoading, view }: Props) => {
             />
           </ListItemMobileGrid.Value>
 
-          <ListItemMobileGrid.Label isLoading={ isLoading }>Value</ListItemMobileGrid.Label>
-          <ListItemMobileGrid.Value>
-            <CurrencyValue value={ item.amount } currency={ currencyUnits.ether } isLoading={ isLoading }/>
-          </ListItemMobileGrid.Value>
         </>
       ) }
 
+      <ListItemMobileGrid.Label isLoading={ isLoading }>Value</ListItemMobileGrid.Label>
+      <ListItemMobileGrid.Value>
+        <CurrencyValue value={ item.amount } currency={ currencyUnits.ether } isLoading={ isLoading }/>
+      </ListItemMobileGrid.Value>
     </ListItemMobileGrid.Container>
   );
 };

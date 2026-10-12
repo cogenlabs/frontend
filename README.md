@@ -6,6 +6,13 @@
     <span> blockchain explorer</span>
 </p>
 
+## Cogen fork
+
+Cogen changes live directly in this repository on `codex/cogen-explorer`, based on
+Blockscout v2.3.5 (`95feb0ba3245c67b1ced38e71a38569951add266`).
+See [Cogen configuration, builds and tests](./docs/COGEN.md).
+The upstream image below does not contain these changes; build this fork for Cogen.
+
 ## Running and configuring the app
 
 App is distributed as a docker image. Here you can find information about the [package](https://github.com/blockscout/frontend/pkgs/container/frontend) and its recent [releases](https://github.com/blockscout/frontend/releases).

@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
 
 import DataListDisplay from 'ui/shared/DataListDisplay';
@@ -36,8 +36,13 @@ const BlockWithdrawals = ({ blockWithdrawalsQuery }: Props) => {
     <DataListDisplay
       isError={ blockWithdrawalsQuery.isError }
       itemsNum={ blockWithdrawalsQuery.data?.items?.length }
-      emptyText="There are no withdrawals for this block."
+      emptyText="There are no fruit reward payouts for this block."
     >
+      <Text mb={ 4 } color="text.secondary">
+        All mining reward payouts are listed here. Miner index is a reward code within this block:
+        0 = block reward, 1 = winning ticket fruit reward, 2+ = included fruit rewards.
+        It is not a permanent miner ID.
+      </Text>
       { content }
     </DataListDisplay>
   );

@@ -71,8 +71,8 @@ const Withdrawals = () => {
       <Skeleton loading={ countersQuery.isPlaceholderData || isPlaceholderData } display="flex" flexWrap="wrap">
         { countersQuery.data && (
           <Text lineHeight={{ base: '24px', lg: '32px' }}>
-            { BigNumber(countersQuery.data.withdrawals_count).toFormat() } withdrawals processed
-            and { getCurrencyValue({ value: countersQuery.data.withdrawals_sum }).valueStr } { currencyUnits.ether } withdrawn
+            { BigNumber(countersQuery.data.withdrawals_count).toFormat() } reward payouts processed
+            and { getCurrencyValue({ value: countersQuery.data.withdrawals_sum }).valueStr } { currencyUnits.ether } issued
           </Text>
         ) }
       </Skeleton>
@@ -84,13 +84,13 @@ const Withdrawals = () => {
   return (
     <>
       <PageTitle
-        title={ config.meta.seo.enhancedDataEnabled ? `${ config.chain.name } withdrawals` : 'Withdrawals' }
+        title={ config.meta.seo.enhancedDataEnabled ? `${ config.chain.name } fruits` : 'Fruits' }
         withTextAd
       />
       <DataListDisplay
         isError={ isError }
         itemsNum={ data?.items.length }
-        emptyText="There are no withdrawals."
+        emptyText="There are no fruit reward payouts."
         actionBar={ actionBar }
       >
         { content }

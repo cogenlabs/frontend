@@ -236,7 +236,7 @@ const AddressPageContent = () => {
       config.features.beaconChain.isEnabled && addressTabsCountersQuery.data?.withdrawals_count ?
         {
           id: 'withdrawals',
-          title: 'Withdrawals',
+          title: 'Fruits',
           count: addressTabsCountersQuery.data?.withdrawals_count,
           component: <AddressWithdrawals shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
         } :

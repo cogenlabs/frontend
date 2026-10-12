@@ -72,7 +72,7 @@ const AddressWithdrawals = ({ shouldRender = true, isQueryEnabled = true }: Prop
     <DataListDisplay
       isError={ isError }
       itemsNum={ data?.items?.length }
-      emptyText="There are no withdrawals for this address."
+      emptyText="There are no fruit reward payouts for this address."
       actionBar={ actionBar }
     >
       { content }
