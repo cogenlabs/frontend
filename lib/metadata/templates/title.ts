@@ -89,6 +89,7 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/api/proxy': '%network_name% node API proxy',
   '/api/csrf': '%network_name% node API CSRF token',
   '/api/healthz': '%network_name% node API health check',
+  '/api/cogen/block': '%network_name% PoVI block data',
   '/api/config': '%network_name% node API app config',
 };
 

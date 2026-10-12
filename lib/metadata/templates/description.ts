@@ -92,6 +92,7 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/api/proxy': DEFAULT_TEMPLATE,
   '/api/csrf': DEFAULT_TEMPLATE,
   '/api/healthz': DEFAULT_TEMPLATE,
+  '/api/cogen/block': DEFAULT_TEMPLATE,
   '/api/config': DEFAULT_TEMPLATE,
 };
 

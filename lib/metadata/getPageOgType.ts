@@ -89,6 +89,7 @@ const OG_TYPE_DICT: Record<Route['pathname'], OGPageType> = {
   '/api/proxy': 'Regular page',
   '/api/csrf': 'Regular page',
   '/api/healthz': 'Regular page',
+  '/api/cogen/block': 'Regular page',
   '/api/config': 'Regular page',
 };
 

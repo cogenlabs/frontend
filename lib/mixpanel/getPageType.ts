@@ -87,6 +87,7 @@ export const PAGE_TYPE_DICT: Record<Route['pathname'], string> = {
   '/api/proxy': 'Node API: Proxy',
   '/api/csrf': 'Node API: CSRF token',
   '/api/healthz': 'Node API: Health check',
+  '/api/cogen/block': 'Node API: PoVI block',
   '/api/config': 'Node API: App config',
 };
 
