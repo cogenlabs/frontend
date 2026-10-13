@@ -34,14 +34,7 @@ const BlockDetailsCogen = ({ height, hash, isLoading }: Props) => {
       hint: 'PoVI block work: floor(2^256 / (target + 1)), in reference tickets. This is the weight used by Cogen fork choice.',
       value: data?.difficulty,
     },
-    { label: 'Total work', hint: 'Cumulative PoVI work through this block.', value: data?.totalWork },
-    { label: 'PoVI target', hint: 'ASERT base target for this block.', value: data?.target },
-    { label: 'PoVI hash', hint: 'Consensus block hash, distinct from the execution block hash below.', value: data?.hash },
-    {
-      label: 'Included fruits',
-      hint: 'Additional fruits in the consensus block, excluding the winning block ticket. The Fruits tab lists all reward payouts.',
-      value: data?.fruitsCount.toString(),
-    },
+    { label: 'Total diffculty', hint: 'Cumulative PoVI work through this block.', value: data?.totalWork },
   ];
 
   return (

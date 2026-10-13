@@ -26,6 +26,8 @@ COGEN_POVI_RPC_URL=http://host.docker.internal:9545
 ```
 
 其余 API 地址、币种、chain ID 沿用 Explorer 的 common-frontend.env。
+导航默认使用 `public/static/cogen/` 中的 Cogen logo：浅色主题使用深色字标，深色主题使用浅色字标，
+折叠导航使用金色图标。仍可通过 `NEXT_PUBLIC_NETWORK_LOGO` / `NEXT_PUBLIC_NETWORK_ICON` 及其 `_DARK` 配置覆盖。
 `COGEN_POVI_RPC_URL` 仅在 Next.js 服务端使用，须指向与 Explorer 执行层数据配套的 Cogen 节点；
 Geth 的 8545 端口不提供 PoVI 数据。Cogen 默认绑定 127.0.0.1:9545，容器部署时须提供可达的私有入口。
 不要向公网开放完整矿工 RPC。浏览器只调用 `/node-api/cogen/block?height=…&hash=…`，
@@ -39,9 +41,9 @@ Geth 的 8545 端口不提供 PoVI 数据。Cogen 默认绑定 127.0.0.1:9545，
 - **Difficulty**：`floor(2^256 / (target + 1))`，与 Cogen `difficulty.Work` 完全一致，单位是参考 tickets。
   它是区块基础工作量，不是 Ethereum PoW 的相对难度，也不是某个模型层的成本归一化 target。
   所有计算使用 BigInt；通过 JSON 传递十进制字符串。
-- **Total work**：共识 RPC 的 `totalWork`，不能使用 Geth `totalDifficulty`。
-- **PoVI target / hash**：本区块 ASERT 基础 target 与共识 hash。
-- **Included fruits**：`fruits.length`，不包含获胜的 block ticket。
+- **Total diffculty**：共识 RPC 的 `totalWork`，不能使用 Geth `totalDifficulty`。
+- 区块详情隐藏 **PoVI target / hash** 和 **Included fruits**；共识接口仍保留这些数据。
+- 区块详情的奖励入口显示为 **Block Rewards**。
 - 原 Withdrawals 页签、地址页、导航、奖励列表改为 **Fruits**；底层 URL、API JSON 和数据库字段保持兼容。
 - **Miner index**：按产品要求显示这个名称，但底层值是每个区块内的奖励代码，**不是矿工身份编号**。
   `0` = 区块奖励，`1` = 获胜 ticket 的 fruit 奖励，`2+i` = 第 i 个额外 fruit 的奖励。
@@ -62,7 +64,7 @@ Geth 的 8545 端口不提供 PoVI 数据。Cogen 默认绑定 127.0.0.1:9545，
 | P0 | 奖励分类与发行汇总 | `rewards[].code/address/amount`，将 block、winning-ticket fruit、included fruits 分开汇总；amount 单位是 Gwei，转 COG 除以 10^9。默认生成配置是 1 COG + 0.5 COG + 0.5 COG × N，但不能在 Explorer 硬编码。 |
 | P0 | 每个 fruit 详情 | `fruits[].index/rewardCode/miner/ticket/modelId/layer/p/q/kind/proofSize`，关联奖励收款地址与实际工作记录。目前 Fruits 表只显示发奖记录，不能称作完整的 fruit 浏览器。 |
 | P0 | 出块 ticket 详情 | `ticket` 中的 miner、ticket、modelId、layer、p/q、kind、commitRoot、proofSize；区分 mock 与 cogen，创世块 ticket 为 null。 |
-| P1 | 共识状态与双层 hash | 当前已展示 PoVI hash；后续增加 PoVI parentHash、workHash、contentHash、fruitsRoot、canonical、safe/finalized 状态。safe/finalized 为配置深度规则，不是以太坊质押投票最终性。 |
+| P1 | 共识状态与双层 hash | 共识接口已提供 PoVI hash，详情页隐藏；后续增加 PoVI parentHash、workHash、contentHash、fruitsRoot、canonical、safe/finalized 状态。safe/finalized 为配置深度规则，不是以太坊质押投票最终性。 |
 | P1 | 矿工页面 | 按收款地址汇总出块数、fruit 数、三类奖励与时间分布。不能按 miner index/validator_index 聚合矿工。 |
 | P1 | 网络挖矿指标 | 区块/fruit 产率、出块间隔、difficulty/totalWork 趋势、发行量与销毁量。PoVI 工作量速率不能直接标为传统 H/s；明确估算窗口、参考 ticket 单位和成本归一化含义。 |
 | P2 | 模型工作分布 | 根据 modelId/layer/kind 统计已确认工作；不能把这些 PoVI 矿工计算等同于已完成的真实用户推理请求或服务收入。 |

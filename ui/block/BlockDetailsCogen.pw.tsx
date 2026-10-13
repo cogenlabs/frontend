@@ -8,7 +8,7 @@ import BeaconChainWithdrawalsTable from 'ui/withdrawals/beaconChain/BeaconChainW
 import BlockDetails from './BlockDetails';
 import type { BlockQuery } from './useBlockQuery';
 
-test('Cogen difficulty and Fruits are visible without expanding details +@mobile', async({ render, page, mockEnvs }) => {
+test('Cogen difficulty and Block Rewards are visible without expanding details +@mobile', async({ render, page, mockEnvs }) => {
   await mockEnvs([ [ 'NEXT_PUBLIC_HAS_BEACON_CHAIN', 'true' ] ]);
   await page.route('**/node-api/cogen/block?**', async(route) => {
     expect(new URL(route.request().url()).searchParams.get('hash')).toBe(blockMock.base.hash);
@@ -23,8 +23,11 @@ test('Cogen difficulty and Fruits are visible without expanding details +@mobile
   } as BlockQuery}/>);
   await expect(component.getByText('Difficulty', { exact: true })).toBeVisible();
   await expect(component.getByText('18446744073709551617', { exact: true })).toBeVisible();
-  await expect(component.getByText('Included fruits', { exact: true })).toBeVisible();
-  await expect(component.getByText('Fruits', { exact: true })).toBeVisible();
+  await expect(component.getByText('PoVI target', { exact: true })).toHaveCount(0);
+  await expect(component.getByText('PoVI hash', { exact: true })).toHaveCount(0);
+  await expect(component.getByText('Included fruits', { exact: true })).toHaveCount(0);
+  await expect(component.getByText('Fruits', { exact: true })).toHaveCount(0);
+  await expect(component.getByText('Block Rewards', { exact: true })).toBeVisible();
   await expect(component.getByText('2 reward payouts', { exact: true })).toBeVisible();
 });
 

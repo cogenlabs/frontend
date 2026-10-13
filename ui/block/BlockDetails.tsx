@@ -268,7 +268,7 @@ const BlockDetails = ({ query }: Props) => {
             hint="Reward payouts: the block reward, the winning ticket fruit reward, and rewards for included fruits"
             isLoading={ isPlaceholderData }
           >
-            Fruits
+            Block Rewards
           </DetailedInfo.ItemLabel>
           <DetailedInfo.ItemValue>
             <Skeleton loading={ isPlaceholderData }>

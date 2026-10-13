@@ -42,15 +42,18 @@ const navigationPromoBanner = (() => {
   return envValue || undefined;
 })();
 
+const networkLogo = getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO');
+const networkIcon = getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_ICON');
+
 const UI = Object.freeze({
   navigation: {
     logo: {
-      'default': getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO'),
-      dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO_DARK'),
+      'default': networkLogo || '/static/cogen/logo.png',
+      dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO_DARK') || (!networkLogo ? '/static/cogen/logo-dark.png' : undefined),
     },
     icon: {
-      'default': getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_ICON'),
-      dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_ICON_DARK'),
+      'default': networkIcon || '/static/cogen/icon.png',
+      dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_ICON_DARK') || (!networkIcon ? '/static/cogen/icon.png' : undefined),
     },
     highlightedRoutes,
     otherLinks: parseEnvJson<Array<NavItemExternal>>(getEnvValue('NEXT_PUBLIC_OTHER_LINKS')) || [],
